@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Twin Trinkets ✦ Handmade Jewellery</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=Caveat:wght@600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --blush: #FFCFD8;
+    --mint: #C3F0DC;
+    --butter: #FFF0B3;
+    --lavender: #DDD6FE;
+    --coral: #FF6B6B;
+    --gold: #D4AF37;
+    --deep: #1a1a2e;
+    --glass-bg: rgba(255,255,255,0.25);
+    --glass-border: rgba(255,255,255,0.45);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #FFF5F7;
+    color: var(--deep);
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+  }
+
+  .mesh-bg {
+    background:
+      radial-gradient(ellipse 60% 50% at 10% 20%, #FFCFD8 0%, transparent 60%),
+      radial-gradient(ellipse 50% 60% at 90% 10%, #DDD6FE 0%, transparent 60%),
+      radial-gradient(ellipse 70% 50% at 50% 90%, #C3F0DC 0%, transparent 60%),
+      #FFF5F7;
+  }
+
+  nav {
+    position: fixed;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+    width: calc(100% - 40px);
+    max-width: 900px;
+    background: rgba(255,255,255,0.6);
+    backdrop-filter: blur(20px);
+    border: 1.5px solid rgba(255,255,255,0.8);
+    border-radius: 100px;
+    padding: 12px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 8px 32px rgba(255,107,107,0.08);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--coral), #a855f7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .nav-links { display: flex; gap: 24px; list-style: none; }
+  .nav-links a { font-size: 0.85rem; font-weight: 500; color: var(--deep); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--coral); }
+
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 24px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: linear-gradient(90deg, var(--blush), var(--lavender));
+    border: 1.5px solid rgba(255,255,255,0.6);
+    border-radius: 100px;
+    padding: 6px 18px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    margin-bottom: 20px;
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+
+  .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 7vw, 5.5rem); line-height: 1.1; font-weight: 700; margin-bottom: 20px; }
+  .hero h1 em { font-style: italic; background: linear-gradient(135deg, var(--coral) 0%, #a855f7 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .hero p { font-size: 1.05rem; color: #555; max-width: 480px; margin: 0 auto 36px; line-height: 1.7; }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, var(--coral), #a855f7);
+    color: white;
+    border: none;
+    border-radius: 100px;
+    padding: 14px 32px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.25s, box-shadow 0.25s;
+    box-shadow: 0 8px 24px rgba(255,107,107,0.3);
+    text-decoration: none;
+  }
+  .btn-primary:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 16px 40px rgba(255,107,107,0.4); }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center; gap: 8px; background: rgba(255,255,255,0.7); color: var(--deep); border: 1.5px solid rgba(255,255,255,0.9); border-radius: 100px; padding: 12px 24px; font-family: 'DM Sans', sans-serif; font-size: 0.88rem; font-weight: 500; cursor: pointer; transition: all 0.25s;
+  }
+
+  .hero-blob { position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.5; pointer-events: none; }
+
+  .section-label { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--coral); margin-bottom: 8px; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700; line-height: 1.2; margin-bottom: 12px; }
+
+  .product-card { background: rgba(255,255,255,0.55); backdrop-filter: blur(16px); border: 1.5px solid rgba(255,255,255,0.8); border-radius: 28px; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; position: relative; }
+  .product-card:hover { transform: translateY(-8px); box-shadow: 0 24px 60px rgba(0,0,0,0.1); }
+
+  .product-image { width: 100%; height: 280px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; background: #fdf2f4; }
+  .product-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+  .product-card:hover .product-image img { transform: scale(1.1); }
+
+  .like-btn { position: absolute; top: 12px; right: 12px; width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.9); border: none; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; font-size: 1.1rem; z-index: 10; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+  .like-btn.liked { background: #FFE4E8; }
+
+  .badge-new { position: absolute; top: 12px; left: 12px; background: linear-gradient(135deg, var(--coral), #ff9a9e); color: white; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.08em; padding: 4px 10px; border-radius: 100px; text-transform: uppercase; z-index: 10; }
+
+  .product-info { padding: 20px; }
+  .product-name { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; margin-bottom: 4px; }
+  .product-sub { font-size: 0.82rem; color: #888; margin-bottom: 12px; }
+  .product-price { font-size: 1.1rem; font-weight: 700; color: var(--coral); margin-bottom: 14px; }
+
+  .btn-chat { flex: 1; background: linear-gradient(135deg, #25D366, #128C7E); color: white; border: none; border-radius: 100px; padding: 10px 16px; font-size: 0.82rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; transition: transform 0.2s, box-shadow 0.2s; text-decoration: none; }
+  .btn-chat:hover { transform: scale(1.04); box-shadow: 0 6px 20px rgba(37,211,102,0.35); }
+
+  .pendant-name { font-family: 'Caveat', cursive; font-size: 1.5rem; fill: #7a5c1e; text-anchor: middle; dominant-baseline: central; font-weight: 600; transition: opacity 0.3s; }
+
+  .personalize-input { width: 100%; max-width: 320px; padding: 14px 20px; border: 2px solid rgba(212,175,55,0.3); border-radius: 100px; font-family: 'DM Sans', sans-serif; font-size: 1rem; background: rgba(255,255,255,0.7); backdrop-filter: blur(10px); color: var(--deep); text-align: center; outline: none; transition: border-color 0.3s, box-shadow 0.3s; }
+  .personalize-input:focus { border-color: var(--gold); box-shadow: 0 0 0 4px rgba(212,175,55,0.15); }
+
+  .marquee-wrap { overflow: hidden; background: var(--deep); padding: 14px 0; position: relative; }
+  .marquee-track { display: flex; gap: 48px; animation: marquee 18s linear infinite; width: max-content; }
+  @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+  .marquee-item { font-size: 0.82rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.7); display: flex; align-items: center; gap: 16px; }
+
+  .testi-card { background: rgba(255,255,255,0.6); backdrop-filter: blur(16px); border: 1.5px solid rgba(255,255,255,0.85); border-radius: 24px; padding: 28px; transition: transform 0.3s; height: 100%; }
+  .stars { color: #FFB800; font-size: 1rem; margin-bottom: 12px; }
+
+  .float-wa { position: fixed; bottom: 28px; right: 28px; z-index: 200; display: flex; align-items: center; gap: 10px; background: linear-gradient(135deg, #25D366, #128C7E); color: white; border-radius: 100px; padding: 14px 22px; font-family: 'DM Sans', sans-serif; font-size: 0.88rem; font-weight: 700; cursor: pointer; box-shadow: 0 8px 32px rgba(37,211,102,0.4); text-decoration: none; animation: pulse-wa 2.5s ease-in-out infinite; }
+  @keyframes pulse-wa { 0%, 100% { box-shadow: 0 8px 32px rgba(37,211,102,0.4); } 50% { box-shadow: 0 8px 48px rgba(37,211,102,0.65); } }
+
+  footer { background: var(--deep); color: rgba(255,255,255,0.65); padding: 60px 24px 36px; text-align: center; }
+  .footer-logo { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; background: linear-gradient(135deg, var(--coral), #a855f7); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 16px; }
+
+  section { padding: 80px 24px; }
+  .container { max-width: 1100px; margin: 0 auto; }
+
+  .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.6s, transform 0.6s; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  .step-card { background: rgba(255,255,255,0.5); backdrop-filter: blur(16px); border: 1.5px solid rgba(255,255,255,0.8); border-radius: 24px; padding: 32px 24px; text-align: center; }
+  .step-num { width: 48px; height: 48px; border-radius: 50%; background: linear-gradient(135deg, var(--coral), #a855f7); color: white; font-weight: 700; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; }
+
+  @media (max-width: 640px) { .nav-links { display: none; } .float-wa span { display: none; } .float-wa { padding: 14px; border-radius: 50%; } }
+</style>
+</head>
+<body class="mesh-bg">
+
+<nav>
+  <div class="nav-logo">✦ Twin Trinkets</div>
+  <ul class="nav-links">
+    <li><a href="#products">Shop</a></li>
+    <li><a href="#personalize">Personalize</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+  </ul>
+  <a href="https://wa.me/919999999999" target="_blank" class="btn-primary" style="padding:10px 20px;font-size:0.82rem;"> 🛒 Shop Now </a>
+</nav>
+
+<section class="hero" id="hero">
+  <div class="hero-blob" style="width:400px;height:400px;background:var(--blush);top:-100px;left:-100px;"></div>
+  <div class="hero-blob" style="width:300px;height:300px;background:var(--lavender);top:10%;right:-80px;"></div>
+  <div class="hero-blob" style="width:350px;height:350px;background:var(--mint);bottom:-80px;left:30%;"></div>
+
+  <div style="position:relative;z-index:1;">
+    <div class="hero-badge">🌸 Handmade with Love · Affordable Luxury</div>
+    <h1> Wear Your <em>Story,</em><br/>Not Just Jewellery. </h1>
+    <p>Handcrafted personalized pieces for the ones who dare to stand out. Because you're not like everyone else.</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+      <a href="#personalize" class="btn-primary"> ✨ Personalize Your Gift </a>
+      <a href="#products" class="btn-secondary"> Explore Collection → </a>
+    </div>
+  </div>
+</section>
+
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <div class="marquee-item">Free shipping above ₹499 <span class="marquee-dot">✦</span></div>
+    <div class="marquee-item">Handcrafted with care <span class="marquee-dot">✦</span></div>
+    <div class="marquee-item">Order on WhatsApp in 60 seconds <span class="marquee-dot">✦</span></div>
+    <div class="marquee-item">New drops every Friday 🌸 <span class="marquee-dot">✦</span></div>
+    <div class="marquee-item">Free shipping above ₹499 <span class="marquee-dot">✦</span></div>
+    <div class="marquee-item">Handcrafted with care <span class="marquee-dot">✦</span></div>
+    <div class="marquee-item">Order on WhatsApp in 60 seconds <span class="marquee-dot">✦</span></div>
+    <div class="marquee-item">New drops every Friday 🌸 <span class="marquee-dot">✦</span></div>
+  </div>
+</div>
+
+<section id="products">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:48px;" class="fade-up">
+      <div class="section-label">Our Collection</div>
+      <h2 class="section-title">Pieces Made for <em style="font-style:italic;color:var(--coral);">You</em></h2>
+      <p style="color:#777; font-size:0.95rem; max-width:440px; margin:0 auto;">Every piece is lovingly hand-assembled. Limited quantities — get yours before it's gone.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px;">
+      <div class="product-card fade-up">
+        <div class="product-image">
+          <img src="1.jpeg" alt="Coastal Shell Anklet">
+          <div class="badge-new">Bestseller</div>
+          <button class="like-btn" onclick="toggleLike(this)">❤️</button>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Coastal Shell Anklet</div>
+          <div class="product-sub">Hand-knotted maroon thread with cowrie shells</div>
+          <div class="product-price">₹299 <span style="font-size:0.8rem;color:#bbb;text-decoration:line-through;">₹499</span></div>
+          <div class="product-actions">
+            <a href="https://wa.me/919999999999?text=Order: Shell Anklet" target="_blank" class="btn-chat">Chat to Buy</a>
+          </div>
+        </div>
+      </div>
+      <div class="product-card fade-up" style="transition-delay:0.1s">
+        <div class="product-image">
+          <img src="2.jpeg" alt="Rose Silk Bangles">
+          <div class="badge-new">New</div>
+          <button class="like-btn" onclick="toggleLike(this)">🤍</button>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Rose Silk Bangle Set</div>
+          <div class="product-sub">Embroidered floral details with crystal accents</div>
+          <div class="product-price">₹449 <span style="font-size:0.8rem;color:#bbb;text-decoration:line-through;">₹799</span></div>
+          <div class="product-actions">
+            <a href="https://wa.me/919999999999?text=Order: Rose Bangles" target="_blank" class="btn-chat">Chat to Buy</a>
+          </div>
+        </div>
+      </div>
+      <div class="product-card fade-up" style="transition-delay:0.2s">
+        <div class="product-image">
+          <img src="3.jpeg" alt="Lotus Set">
+          <button class="like-btn" onclick="toggleLike(this)">🤍</button>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Lotus Bloom Collection</div>
+          <div class="product-sub">Complete set: Jhumkas, Maang Tikka & Choker</div>
+          <div class="product-price">₹899 <span style="font-size:0.8rem;color:#bbb;text-decoration:line-through;">₹1499</span></div>
+          <div class="product-actions">
+            <a href="https://wa.me/919999999999?text=Order: Lotus Set" target="_blank" class="btn-chat">Chat to Buy</a>
+          </div>
+        </div>
+      </div>
+      <div class="product-card fade-up" style="transition-delay:0.3s">
+        <div class="product-image">
+          <img src="4.jpeg" alt="Fabric Earrings">
+          <div class="badge-new">Handmade</div>
+          <button class="like-btn" onclick="toggleLike(this)">🤍</button>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Boho Fabric Studs</div>
+          <div class="product-sub">Hand-stitched patterns with pearl drops</div>
+          <div class="product-price">₹199 <span style="font-size:0.8rem;color:#bbb;text-decoration:line-through;">₹349</span></div>
+          <div class="product-actions">
+            <a href="https://wa.me/919999999999?text=Order: Boho Studs" target="_blank" class="btn-chat">Chat to Buy</a>
+          </div>
+        </div>
+      </div>
+      <div class="product-card fade-up" style="transition-delay:0.4s">
+        <div class="product-image">
+          <img src="5.jpeg" alt="Purple Stack">
+          <button class="like-btn" onclick="toggleLike(this)">🤍</button>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Royal Silk Thread Stack</div>
+          <div class="product-sub">Purple and Orange dual-tone festive stack</div>
+          <div class="product-price">₹549 <span style="font-size:0.8rem;color:#bbb;text-decoration:line-through;">₹899</span></div>
+          <div class="product-actions">
+            <a href="https://wa.me/919999999999?text=Order: Royal Stack" target="_blank" class="btn-chat">Chat to Buy</a>
+          </div>
+        </div>
+      </div>
+      <div class="product-card fade-up" style="transition-delay:0.5s">
+        <div class="product-image">
+          <img src="6.jpeg" alt="Black Kada">
+          <div class="badge-new">Fan Fav</div>
+          <button class="like-btn" onclick="toggleLike(this)">🤍</button>
+        </div>
+        <div class="product-info">
+          <div class="product-name">Midnight Gold Kada Set</div>
+          <div class="product-sub">Black silk thread with gold stone work</div>
+          <div class="product-price">₹399 <span style="font-size:0.8rem;color:#bbb;text-decoration:line-through;">₹699</span></div>
+          <div class="product-actions">
+            <a href="https://wa.me/919999999999?text=Order: Midnight Kada" target="_blank" class="btn-chat">Chat to Buy</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="background:rgba(255,255,255,0.3);backdrop-filter:blur(10px);">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:48px;" class="fade-up">
+      <div class="section-label">Process</div>
+      <h2 class="section-title">How to Order in 3 Steps</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px;">
+      <div class="step-card fade-up">
+        <div class="step-num">1</div>
+        <div style="font-size:2.5rem;margin-bottom:12px;">🛍️</div>
+        <div style="font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;margin-bottom:8px;">Pick Your Piece</div>
+        <div style="font-size:0.85rem;color:#777;line-height:1.6;">Browse our collection and choose your favourite jewellery or accessory.</div>
+      </div>
+      <div class="step-card fade-up" style="transition-delay:0.15s">
+        <div class="step-num">2</div>
+        <div style="font-size:2.5rem;margin-bottom:12px;">💬</div>
+        <div style="font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;margin-bottom:8px;">Chat With Us</div>
+        <div style="font-size:0.85rem;color:#777;line-height:1.6;">Tap "Chat to Buy" and message us on WhatsApp with your order details and personalization.</div>
+      </div>
+      <div class="step-card fade-up" style="transition-delay:0.3s">
+        <div class="step-num">3</div>
+        <div style="font-size:2.5rem;margin-bottom:12px;">📦</div>
+        <div style="font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:700;margin-bottom:8px;">Receive & Glow</div>
+        <div style="font-size:0.85rem;color:#777;line-height:1.6;">We handcraft & ship within 3–5 days. Unwrap your story.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="personalize" style="background: rgba(212, 175, 55, 0.03);">
+  <div class="container">
+    <div style="display:grid;grid-template-columns: 1fr 1fr; gap:60px; align-items:center;" class="fade-up">
+      
+      <div>
+        <div class="section-label">Custom Studio</div>
+        <h2 class="section-title">Make It <em style="font-style:italic;color:#D4AF37;">Yours</em></h2>
+        <p style="color:#777; line-height:1.7; margin-bottom:24px; font-size:0.95rem;">
+          Type your name or a meaningful word below to see it come to life on our signature 18K gold-plated pendant.
+        </p>
+
+        <div style="margin-bottom:20px;">
+          <label style="display:block; font-size:0.75rem; font-weight:700; color:#aaa; text-transform:uppercase; margin-bottom:8px; letter-spacing:0.05em;">Enter Name</label>
+          <input class="personalize-input" id="nameInput" type="text" placeholder="e.g. Priya, Love, Hope..." maxlength="12" oninput="updatePendant()" style="width:100%; text-align:left; border-radius:16px; background: white;" />
+        </div>
+
+        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:32px;">
+          <span style="font-size: 0.8rem; color: #888; align-self: center; margin-right: 4px;">Try:</span>
+          <button onclick="setName('Priya')" style="background:white; border:1px solid #eee; border-radius:100px; padding:4px 12px; font-size:0.75rem; cursor:pointer;">Priya</button>
+          <button onclick="setName('Shine')" style="background:white; border:1px solid #eee; border-radius:100px; padding:4px 12px; font-size:0.75rem; cursor:pointer;">Shine</button>
+          <button onclick="setName('Bestie')" style="background:white; border:1px solid #eee; border-radius:100px; padding:4px 12px; font-size:0.75rem; cursor:pointer;">Bestie</button>
+        </div>
+
+        <a id="orderPersonalizedBtn" href="https://wa.me/919999999999?text=Custom order" target="_blank" class="btn-primary" style="width: 100%; justify-content: center;"> 🌟 Order This Design </a>
+
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:16px; margin-top:32px; border-top: 1px solid #eee; padding-top:24px;">
+          <div style="display:flex; gap:10px; align-items:center;">
+            <span style="font-size:1.2rem;">✨</span>
+            <div style="font-size:0.7rem; line-height:1.3; color:#666;"><strong>Non-Tarnish</strong><br>Premium Quality</div>
+          </div>
+          <div style="display:flex; gap:10px; align-items:center;">
+            <span style="font-size:1.2rem;">🚚</span>
+            <div style="font-size:0.7rem; line-height:1.3; color:#666;"><strong>Fast Shipping</strong><br>Ships in 3-5 days</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-direction:column; align-items:center; position:relative;">
+        <div style="position:absolute; inset:-20px; border: 1px dashed #D4AF37; opacity:0.2; border-radius:40px; pointer-events:none;"></div>
+        <svg width="280" height="320" viewBox="0 0 280 320" xmlns="http://www.w3.org/2000/svg" style="filter: drop-shadow(0 20px 30px rgba(212,175,55,0.15));">
+          <defs><linearGradient id="pendantGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#FFD700;stop-opacity:1"/><stop offset="100%" style="stop-color:#B8860B;stop-opacity:1"/></linearGradient></defs>
+          <path d="M 50 110 Q 90 180 140 185 Q 190 180 230 130" stroke="#D4AF37" stroke-width="3" fill="none" opacity="0.8"/>
+          <ellipse cx="140" cy="240" rx="55" ry="42" fill="url(#pendantGrad)"/>
+          <ellipse cx="140" cy="240" rx="48" ry="35" fill="none" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+          <text id="pendantText" class="pendant-name" x="140" y="242" font-family="Caveat, cursive" font-size="24" fill="#7a5c1e" text-anchor="middle">Your Name</text>
+        </svg>
+        <div style="margin-top: -20px; background: white; padding: 8px 20px; border-radius: 100px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #eee; z-index: 2;">
+          <span style="font-size: 0.75rem; font-weight: 600; color: #D4AF37;">Live 3D Preview</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="reviews">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:48px;" class="fade-up">
+      <div class="section-label">Wall of Love</div>
+      <h2 class="section-title">Our Girls Are <em style="font-style:italic;color:var(--coral);">Obsessed</em></h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px;">
+      <div class="testi-card fade-up">
+        <div class="stars">★★★★★</div>
+        <p style="font-size:0.92rem; color:#444; font-style:italic; line-height: 1.6;">"The quality of the silk thread bangles is amazing. Very sturdy and looks premium! It was the perfect match for my Diwali outfit."</p>
+        <div style="font-weight:600; font-size:0.85rem; margin-top:15px; display: flex; align-items: center; gap: 8px;">
+          <span>Ananya R.</span>
+          <span style="color: #25D366; font-size: 0.7rem;">Verified Buyer</span>
+        </div>
+      </div>
+      <div class="testi-card fade-up" style="transition-delay: 0.1s;">
+        <div class="stars">★★★★★</div>
+        <p style="font-size:0.92rem; color:#444; font-style:italic; line-height: 1.6;">"I ordered a customized name pendant for my bestie's birthday. She literally cried! The finish is so clean and it hasn't tarnished at all."</p>
+        <div style="font-weight:600; font-size:0.85rem; margin-top:15px; display: flex; align-items: center; gap: 8px;">
+          <span>Priya S.</span>
+          <span style="color: #25D366; font-size: 0.7rem;">Verified Buyer</span>
+        </div>
+      </div>
+      <div class="testi-card fade-up" style="transition-delay: 0.2s;">
+        <div class="stars">★★★★★</div>
+        <p style="font-size:0.92rem; color:#444; font-style:italic; line-height: 1.6;">"Ordered the shell anklet. It's so lightweight and cute. Perfect for my beach vacation. WhatsApp ordering was so seamless!"</p>
+        <div style="font-weight:600; font-size:0.85rem; margin-top:15px; display: flex; align-items: center; gap: 8px;">
+          <span>Isha K.</span>
+          <span style="color: #25D366; font-size: 0.7rem;">Verified Buyer</span>
+        </div>
+      </div>
+      <div class="testi-card fade-up" style="transition-delay: 0.3s;">
+        <div class="stars">★★★★★</div>
+        <p style="font-size:0.92rem; color:#444; font-style:italic; line-height: 1.6;">"Value for money 10/10. The packaging was so aesthetic, it felt like opening a luxury gift. Definitely ordering more soon."</p>
+        <div style="font-weight:600; font-size:0.85rem; margin-top:15px; display: flex; align-items: center; gap: 8px;">
+          <span>Mehak G.</span>
+          <span style="color: #25D366; font-size: 0.7rem;">Verified Buyer</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">✦ Twin Trinkets</div>
+  <p style="color: rgba(255,255,255,0.5); font-size: 0.9rem; margin-bottom: 30px;">Handcrafted jewellery for every mood and occasion.</p>
+  <div style="font-size:0.75rem;color:rgba(255,255,255,0.25); margin-top: 40px;">© 2026 Twin Trinkets. Made with 💗 in India.</div>
+</footer>
+
+<a href="https://wa.me/919999999999" target="_blank" class="float-wa"> <span>Order on WhatsApp</span> </a>
+
+<script>
+  function toggleLike(btn) { btn.classList.toggle('liked'); btn.textContent = btn.classList.contains('liked') ? '❤️' : '🤍'; }
+
+  function updatePendant() {
+    const input = document.getElementById('nameInput');
+    const text = document.getElementById('pendantText');
+    const orderBtn = document.getElementById('orderPersonalizedBtn');
+    const val = input.value.trim() || 'Your Name';
+    text.textContent = val;
+    orderBtn.href = `https://wa.me/919999999999?text=Custom order for: ${val}`;
+  }
+
+  function setName(name) { document.getElementById('nameInput').value = name; updatePendant(); }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
